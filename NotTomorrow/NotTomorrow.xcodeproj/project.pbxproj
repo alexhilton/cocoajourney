@@ -7,9 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6FBD7A371A1B84D4008EEEC8 /* TodayListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FBD7A361A1B84D4008EEEC8 /* TodayListController.swift */; };
 		6FC88B111A1A465F00B7E375 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FC88B101A1A465F00B7E375 /* AppDelegate.swift */; };
 		6FC88B141A1A465F00B7E375 /* NotTomorrow.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6FC88B121A1A465F00B7E375 /* NotTomorrow.xcdatamodeld */; };
-		6FC88B161A1A465F00B7E375 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FC88B151A1A465F00B7E375 /* ViewController.swift */; };
 		6FC88B191A1A465F00B7E375 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6FC88B171A1A465F00B7E375 /* Main.storyboard */; };
 		6FC88B1B1A1A465F00B7E375 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6FC88B1A1A1A465F00B7E375 /* Images.xcassets */; };
 		6FC88B1E1A1A465F00B7E375 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FC88B1C1A1A465F00B7E375 /* LaunchScreen.xib */; };
@@ -27,11 +27,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6FBD7A361A1B84D4008EEEC8 /* TodayListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodayListController.swift; sourceTree = "<group>"; };
 		6FC88B0B1A1A465F00B7E375 /* NotTomorrow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NotTomorrow.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6FC88B0F1A1A465F00B7E375 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6FC88B101A1A465F00B7E375 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6FC88B131A1A465F00B7E375 /* NotTomorrow.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = NotTomorrow.xcdatamodel; sourceTree = "<group>"; };
-		6FC88B151A1A465F00B7E375 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		6FC88B181A1A465F00B7E375 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		6FC88B1A1A1A465F00B7E375 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		6FC88B1D1A1A465F00B7E375 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -80,12 +80,12 @@
 			isa = PBXGroup;
 			children = (
 				6FC88B101A1A465F00B7E375 /* AppDelegate.swift */,
-				6FC88B151A1A465F00B7E375 /* ViewController.swift */,
 				6FC88B171A1A465F00B7E375 /* Main.storyboard */,
 				6FC88B1A1A1A465F00B7E375 /* Images.xcassets */,
 				6FC88B1C1A1A465F00B7E375 /* LaunchScreen.xib */,
 				6FC88B121A1A465F00B7E375 /* NotTomorrow.xcdatamodeld */,
 				6FC88B0E1A1A465F00B7E375 /* Supporting Files */,
+				6FBD7A361A1B84D4008EEEC8 /* TodayListController.swift */,
 			);
 			path = NotTomorrow;
 			sourceTree = "<group>";
@@ -215,7 +215,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6FC88B161A1A465F00B7E375 /* ViewController.swift in Sources */,
+				6FBD7A371A1B84D4008EEEC8 /* TodayListController.swift in Sources */,
 				6FC88B141A1A465F00B7E375 /* NotTomorrow.xcdatamodeld in Sources */,
 				6FC88B111A1A465F00B7E375 /* AppDelegate.swift in Sources */,
 			);
@@ -411,6 +411,7 @@
 				6FC88B2F1A1A465F00B7E375 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		6FC88B301A1A465F00B7E375 /* Build configuration list for PBXNativeTarget "NotTomorrowTests" */ = {
 			isa = XCConfigurationList;
@@ -419,6 +420,7 @@
 				6FC88B321A1A465F00B7E375 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
