@@ -9,7 +9,8 @@
 import UIKit
 
 class TodayListController: UITableViewController {
-    var tasks = ["Call app store", "Download a game", "Send kid to school", "Charge the phone bill"]
+    var tasks: [NTTaskItem]?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -17,6 +18,12 @@ class TodayListController: UITableViewController {
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
+        let formater = NSDateFormatter()
+        formater.dateFormat = "EEE MMM-dd"
+        let today = formater.stringFromDate(NSDate())
+        title = "Today -- \(today)"
+        tasks = NTTaskItem.createData()
+        
         navigationItem.rightBarButtonItem = editButtonItem()
         tableView!.registerClass(UITableViewCell.classForCoder(), forCellReuseIdentifier: "cell")
     }
@@ -37,19 +44,30 @@ class TodayListController: UITableViewController {
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete method implementation.
         // Return the number of rows in the section.
-        return tasks.count
+        return tasks!.count
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as UITableViewCell
 
         // Configure the cell...
-        cell.textLabel.text = tasks[indexPath.row]
+        cell.textLabel.text = tasks![indexPath.row].description
         cell.accessoryType = UITableViewCellAccessoryType.DetailButton
-        cell.imageView.image = UIImage(named: "ic_unchcked_normal.png")
+        let completed = tasks![indexPath.row].completed
+        cell.imageView.image = UIImage(named: (completed! ? "ic_checked_normal.png" : "ic_unchcked_normal.png"))
+        let singleTap = UITapGestureRecognizer()
+        singleTap.addTarget(self, action: "thumbTapped:")
+        singleTap.numberOfTapsRequired = 1
+        singleTap.numberOfTouchesRequired = 1
+        cell.imageView.addGestureRecognizer(singleTap)
+        cell.imageView.userInteractionEnabled = true
         return cell
     }
-
+    
+    func thumbTapped(gestureRecognizr: UITapGestureRecognizer) {
+        NSLog("thumbnail clicked")
+    }
+    
     // Override to support conditional editing of the table view.
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         // Return NO if you do not want the specified item to be editable.
@@ -60,7 +78,7 @@ class TodayListController: UITableViewController {
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
             // Delete the row from the data source
-            tasks.removeAtIndex(indexPath.row)
+            tasks!.removeAtIndex(indexPath.row)
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
         } else if editingStyle == .Insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
@@ -69,9 +87,9 @@ class TodayListController: UITableViewController {
 
     // Override to support rearranging the table view.
     override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-        let tmp = tasks[fromIndexPath.row]
-        tasks[fromIndexPath.row] = tasks[toIndexPath.row]
-        tasks[toIndexPath.row] = tmp;
+        let tmp = tasks![fromIndexPath.row]
+        tasks![fromIndexPath.row] = tasks![toIndexPath.row]
+        tasks![toIndexPath.row] = tmp;
     }
 
     // Override to support conditional rearranging of the table view.
@@ -94,7 +112,8 @@ class TodayListController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        viewTaskDetail(index: indexPath.row)
+        tasks![indexPath.row].completed = !tasks![indexPath.row].completed!
+        tableView.reloadData()
     }
     
     /*
