@@ -29,7 +29,7 @@ class NTTaskItem {
     }
     
     class func createData() -> [NTTaskItem] {
-        return [NTTaskItem(description: "Shopping for groceries"), NTTaskItem(description: "Play basketball with friends"), NTTaskItem(description: "Drink with David"), NTTaskItem(description: "Fix cellphone")]
+        return [NTTaskItem(description: "Shopping for groceries"), NTTaskItem(description: "Play basketball with friends"), NTTaskItem(description: "Drink with David"), NTTaskItem(description: "Fix cellphone"), NTTaskItem()]
     }
 }
 
