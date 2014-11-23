@@ -23,11 +23,22 @@ class TodayListController: UITableViewController {
         let today = formater.stringFromDate(NSDate())
         title = "Today -- \(today)"
         tasks = NTTaskItem.createData()
-        navigationItem.rightBarButtonItem = editButtonItem()
+        navigationItem.leftBarButtonItem = editButtonItem()
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Add", style: UIBarButtonItemStyle.Plain, target: self, action: "triggerAdd")
         tableView!.registerClass(UITableViewCell.classForCoder(), forCellReuseIdentifier: "cell")
         tableView!.registerNib(UINib(nibName: "AddTaskTableViewCell", bundle: nil), forCellReuseIdentifier: "addcell")
     }
 
+    func triggerAdd() {
+        let indexPath = NSIndexPath(forRow: tasks!.count - 1, inSection: 0)
+        var cell = tableView.cellForRowAtIndexPath(indexPath) as AddTaskTableViewCell
+        if cell.addingNewTask! {
+            // ignore the event if we are already in adding mode
+            return
+        }
+        cell.addingNewTask = true
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
