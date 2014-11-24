@@ -13,23 +13,26 @@ class NTTaskItem {
     var completed: Bool?
     var creationDate: NSDate?
     var type: TaskType?
+    var id: Int?
     
-    init() {
+    init(id: Int) {
         description = ""
         completed = false
         creationDate = NSDate()
         type = .Today
+        self.id = id
     }
     
-    init(description: String?) {
+    init(description: String?, id: Int) {
         self.description = description
         completed = false
         creationDate = NSDate()
         type = .Today
+        self.id = id
     }
     
     class func createData() -> [NTTaskItem] {
-        return [NTTaskItem(description: "Shopping for groceries"), NTTaskItem(description: "Play basketball with friends"), NTTaskItem(description: "Drink with David"), NTTaskItem(description: "Fix cellphone"), NTTaskItem()]
+        return [NTTaskItem(description: "Shopping for groceries", id: 0), NTTaskItem(description: "Play basketball with friends", id: 1), NTTaskItem(description: "Drink with David", id: 2), NTTaskItem(description: "Fix cellphone", id: 3), NTTaskItem(id: -1)]
     }
 }
 

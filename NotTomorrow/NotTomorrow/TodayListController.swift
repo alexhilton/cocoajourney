@@ -28,6 +28,10 @@ class TodayListController: UITableViewController {
         tableView!.registerClass(UITableViewCell.classForCoder(), forCellReuseIdentifier: "cell")
         tableView!.registerNib(UINib(nibName: "AddTaskTableViewCell", bundle: nil), forCellReuseIdentifier: "addcell")
     }
+    
+    override func viewWillAppear(animated: Bool) {
+        tableView?.reloadData()
+    }
 
     func triggerAdd() {
         let indexPath = NSIndexPath(forRow: tasks!.count - 1, inSection: 0)
@@ -46,11 +50,21 @@ class TodayListController: UITableViewController {
 
     // MARK: - Public interface
     func addTask(description: String) {
-        let item = NTTaskItem(description: description)
         let last = tasks!.count - 1
+        let item = NTTaskItem(description: description, id: last)
         tasks!.insert(item, atIndex: last)
         tableView?.reloadData()
         NSLog("add task are you aware %@, count %d", description, tasks!.count)
+    }
+    
+    func deleteTask(id: Int) {
+        for index in 0..<tasks!.count-1 {
+            if tasks![index].id == id {
+                tasks?.removeAtIndex(index)
+                break
+            }
+        }
+        tableView?.reloadData()
     }
     
     // MARK: - Table view data source
@@ -138,11 +152,9 @@ class TodayListController: UITableViewController {
     }
     
     private func viewTaskDetail(#index: Int?) {
-        let alert = UIAlertView()
-        alert.title = "Notification"
-        alert.message = "View the details about this task, will comming soon."
-        alert.addButtonWithTitle("Okay")
-        alert.show()
+        let viewController = TaskDetailViewController(nibName: "TaskDetailViewController", bundle: nil)
+        viewController.taskItem = self.tasks![index!]
+        navigationController?.pushViewController(viewController, animated: true)
     }
 
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
