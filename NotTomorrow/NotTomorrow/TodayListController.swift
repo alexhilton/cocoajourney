@@ -103,12 +103,7 @@ class TodayListController: UITableViewController {
         cell.accessoryType = UITableViewCellAccessoryType.DetailButton
         let completed = tasks![indexPath.row].completed
         cell.imageView.image = UIImage(named: (completed! ? "ic_checked_normal.png" : "ic_unchcked_normal.png"))
-        let singleTap = UITapGestureRecognizer()
-        singleTap.addTarget(self, action: "thumbTapped:")
-        singleTap.numberOfTapsRequired = 1
-        singleTap.numberOfTouchesRequired = 1
-        cell.imageView.addGestureRecognizer(singleTap)
-        cell.imageView.userInteractionEnabled = true
+        cell.imageView.userInteractionEnabled = false
         return cell
     }
     
