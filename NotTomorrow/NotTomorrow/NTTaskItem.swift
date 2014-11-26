@@ -15,12 +15,21 @@ class NTTaskItem {
     var type: TaskType?
     var id: Int?
     
+    var estimated: Int? {
+        didSet {
+            if estimated > 6 {
+                estimated = 6
+            }
+        }
+    }
+    
     init(id: Int) {
         description = ""
         completed = false
         creationDate = NSDate()
         type = .Today
         self.id = id
+        estimated = 0
     }
     
     init(description: String?, id: Int) {
@@ -29,6 +38,7 @@ class NTTaskItem {
         creationDate = NSDate()
         type = .Today
         self.id = id
+        estimated = 0
     }
     
     class func createData() -> [NTTaskItem] {
