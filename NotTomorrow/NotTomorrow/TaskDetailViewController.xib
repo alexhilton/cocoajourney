@@ -9,7 +9,9 @@
                 <outlet property="delete" destination="P1s-hR-zpd" id="upx-sb-t6c"/>
                 <outlet property="descriptionLabel" destination="Qab-5w-7Gw" id="ZSg-Pk-Ccb"/>
                 <outlet property="estimatedPomodoros" destination="0Cu-hf-CJY" id="jai-EE-NcW"/>
+                <outlet property="labelPlan" destination="GWF-yY-PEV" id="XUq-lj-hzG"/>
                 <outlet property="markCompleted" destination="9Pb-iV-kkY" id="BpB-W0-1Tt"/>
+                <outlet property="planTimePicker" destination="exL-G1-ghJ" id="bg6-6v-nmC"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -19,7 +21,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Pb-iV-kkY">
-                    <rect key="frame" x="13" y="562" width="131" height="30"/>
+                    <rect key="frame" x="13" y="530" width="131" height="30"/>
                     <state key="normal" title="Mark completed">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
@@ -28,37 +30,22 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P1s-hR-zpd">
-                    <rect key="frame" x="152" y="562" width="63" height="30"/>
+                    <rect key="frame" x="185" y="530" width="63" height="30"/>
                     <state key="normal" title="Delete">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
-                    <variation key="heightClass=regular-widthClass=regular" fixedFrame="YES">
-                        <rect key="frame" x="182" y="562" width="63" height="30"/>
-                    </variation>
                     <connections>
                         <action selector="deleteClicked:" destination="-1" eventType="touchUpInside" id="XZo-PG-Fvf"/>
                     </connections>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B3y-Wf-j27">
-                    <rect key="frame" x="232" y="562" width="46" height="30"/>
-                    <state key="normal" title="Start">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <variation key="heightClass=regular-widthClass=regular" fixedFrame="YES">
-                        <rect key="frame" x="320" y="562" width="46" height="30"/>
-                    </variation>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qab-5w-7Gw">
                     <rect key="frame" x="13" y="64" width="516" height="46"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
-                    <variation key="heightClass=regular-widthClass=regular" fixedFrame="YES">
-                        <rect key="frame" x="13" y="238" width="516" height="46"/>
-                    </variation>
                 </label>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" indicatorStyle="white" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="0Cu-hf-CJY">
-                    <rect key="frame" x="21" y="118" width="392" height="62"/>
+                    <inset key="scrollIndicatorInsets" minX="23" minY="12" maxX="32" maxY="14"/>
                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="phe-1d-Euq">
                         <size key="itemSize" width="50" height="50"/>
                         <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -66,9 +53,31 @@
                         <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                     </collectionViewFlowLayout>
                 </collectionView>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B3y-Wf-j27">
+                    <rect key="frame" x="28" y="480" width="60" height="34"/>
+                    <state key="normal" title="Start">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Plan the task" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GWF-yY-PEV">
+                    <rect key="frame" x="13" y="215" width="269" height="42"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="exL-G1-ghJ">
+                    <rect key="frame" x="0.0" y="444" width="277" height="162"/>
+                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <date key="date" timeIntervalSinceReferenceDate="438793078.61081398">
+                        <!--2014-11-27 14:57:58 +0000-->
+                    </date>
+                    <connections>
+                        <action selector="planTimeChanged:" destination="-1" eventType="valueChanged" id="Vm8-Mn-F1h"/>
+                    </connections>
+                </datePicker>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-            <point key="canvasLocation" x="130" y="137"/>
+            <point key="canvasLocation" x="-77" y="130"/>
         </view>
     </objects>
 </document>

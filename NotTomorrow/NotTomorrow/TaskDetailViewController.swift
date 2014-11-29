@@ -17,16 +17,47 @@ class TaskDetailViewController: UIViewController, UICollectionViewDataSource, UI
     @IBOutlet weak var markCompleted: UIButton!
     @IBOutlet weak var delete: UIButton!
     
+    @IBOutlet weak var labelPlan: UILabel!
+    @IBOutlet weak var planTimePicker: UIDatePicker!
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         title = "Task details"
         setupLabel()
+        
+        // setup the estimated pomodoro indicators.
         estimatedPomodoros.backgroundColor = UIColor.whiteColor()
         estimatedPomodoros.registerClass(UICollectionViewCell.classForCoder(), forCellWithReuseIdentifier: "cell")
         estimatedPomodoros.delegate = self
         estimatedPomodoros.dataSource = self
+        
+        // set up the plan time label
+        labelPlan.userInteractionEnabled = true
+        // It also works, if we remove 'Selector(...)'
+        let tapGesture = UITapGestureRecognizer(target: self, action: Selector("labelPlanTapped:"))
+        labelPlan.addGestureRecognizer(tapGesture)
+        
+        // setup the time picker
+        planTimePicker.hidden = true
+        // Have to set the background with code. It does not work with XIB or storyboard.
+        planTimePicker.backgroundColor = UIColor(white: 1.0, alpha: 1.0)
+        planTimePicker.minimumDate = NSDate()
+    }
+    
+    func labelPlanTapped(sender: UITapGestureRecognizer) {
+        if taskItem!.completed! {
+            let alert = UIAlertView()
+            alert.title = "Notification"
+            alert.message = "The task is already completed. You do not need to plan it anymore. ^_^"
+            alert.addButtonWithTitle("Okay")
+            alert.show()
+            return
+        }
+        if let date = taskItem!.startTime {
+            planTimePicker.date = date
+        }
+        planTimePicker.hidden = !planTimePicker.hidden
     }
     
     func setupLabel() {
@@ -56,6 +87,22 @@ class TaskDetailViewController: UIViewController, UICollectionViewDataSource, UI
         let nav = UIApplication.sharedApplication().delegate?.window??.rootViewController as UINavigationController
         let tableViewController = nav.visibleViewController as TodayListController
         tableViewController.deleteTask(self.taskItem!.id!)
+    }
+
+    @IBAction func planTimeChanged(sender: AnyObject) {
+        if taskItem!.completed! {
+            return
+        }
+        let picker = sender as UIDatePicker
+        taskItem?.startTime = picker.date
+        let formater = NSDateFormatter()
+        formater.dateFormat = "HH:mm aa"
+        let text = "Start the task at \(formater.stringFromDate(picker.date))"
+        
+        let attrString = NSMutableAttributedString(string: text)
+        var attrs = [NSForegroundColorAttributeName: UIColor.brownColor()]
+        attrString.setAttributes(attrs, range: NSMakeRange(18, 8))
+        labelPlan.attributedText = attrString
     }
 
     /*

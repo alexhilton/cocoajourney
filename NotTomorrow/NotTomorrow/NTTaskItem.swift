@@ -14,6 +14,7 @@ class NTTaskItem {
     var creationDate: NSDate?
     var type: TaskType?
     var id: Int?
+    var startTime: NSDate?
     
     var estimated: Int? {
         didSet {
