@@ -82,6 +82,13 @@ class TaskDetailViewController: UIViewController, UICollectionViewDataSource, UI
         setupLabel()
     }
     
+    @IBAction func startClicked(sender: AnyObject) {
+        // start a pomodoro
+        var pomodoro = PomodoroViewController(nibName: "PomodoroViewController", bundle: nil)
+        pomodoro.taskItem = taskItem
+        navigationController?.pushViewController(pomodoro, animated: true)
+    }
+    
     @IBAction func deleteClicked(sender: AnyObject) {
         navigationController?.popViewControllerAnimated(true)
         let nav = UIApplication.sharedApplication().delegate?.window??.rootViewController as UINavigationController

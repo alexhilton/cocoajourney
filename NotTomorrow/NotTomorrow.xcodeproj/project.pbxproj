@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6F6951C21A2ACADE00C8235B /* PomodoroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F6951C01A2ACADE00C8235B /* PomodoroViewController.swift */; };
+		6F6951C31A2ACADE00C8235B /* PomodoroViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F6951C11A2ACADE00C8235B /* PomodoroViewController.xib */; };
 		6FBAE7BB1A1E46F4002683B0 /* AddTaskTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FBAE7B91A1E46F4002683B0 /* AddTaskTableViewCell.swift */; };
 		6FBAE7BC1A1E46F4002683B0 /* AddTaskTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FBAE7BA1A1E46F4002683B0 /* AddTaskTableViewCell.xib */; };
 		6FBC84941A1CD26E001170DC /* NTTaskItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FBC84931A1CD26E001170DC /* NTTaskItem.swift */; };
@@ -32,6 +34,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6F6951C01A2ACADE00C8235B /* PomodoroViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PomodoroViewController.swift; sourceTree = "<group>"; };
+		6F6951C11A2ACADE00C8235B /* PomodoroViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PomodoroViewController.xib; sourceTree = "<group>"; };
 		6FBAE7B91A1E46F4002683B0 /* AddTaskTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddTaskTableViewCell.swift; sourceTree = "<group>"; };
 		6FBAE7BA1A1E46F4002683B0 /* AddTaskTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddTaskTableViewCell.xib; sourceTree = "<group>"; };
 		6FBC84931A1CD26E001170DC /* NTTaskItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NTTaskItem.swift; sourceTree = "<group>"; };
@@ -97,6 +101,8 @@
 				6FC88B0E1A1A465F00B7E375 /* Supporting Files */,
 				6FBD7A361A1B84D4008EEEC8 /* TodayListController.swift */,
 				6FCF501A1A218CAD00909A9B /* TaskDetailViewController.swift */,
+				6F6951C01A2ACADE00C8235B /* PomodoroViewController.swift */,
+				6F6951C11A2ACADE00C8235B /* PomodoroViewController.xib */,
 				6FCF501B1A218CAD00909A9B /* TaskDetailViewController.xib */,
 				6FBAE7B91A1E46F4002683B0 /* AddTaskTableViewCell.swift */,
 				6FBAE7BA1A1E46F4002683B0 /* AddTaskTableViewCell.xib */,
@@ -215,6 +221,7 @@
 				6FC88B191A1A465F00B7E375 /* Main.storyboard in Resources */,
 				6FC88B1E1A1A465F00B7E375 /* LaunchScreen.xib in Resources */,
 				6FC88B1B1A1A465F00B7E375 /* Images.xcassets in Resources */,
+				6F6951C31A2ACADE00C8235B /* PomodoroViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -237,6 +244,7 @@
 				6FC88B141A1A465F00B7E375 /* NotTomorrow.xcdatamodeld in Sources */,
 				6FBAE7BB1A1E46F4002683B0 /* AddTaskTableViewCell.swift in Sources */,
 				6FC88B111A1A465F00B7E375 /* AppDelegate.swift in Sources */,
+				6F6951C21A2ACADE00C8235B /* PomodoroViewController.swift in Sources */,
 				6FBC84941A1CD26E001170DC /* NTTaskItem.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

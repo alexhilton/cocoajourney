@@ -45,6 +45,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" indicatorStyle="white" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="0Cu-hf-CJY">
+                    <rect key="frame" x="21" y="118" width="447" height="62"/>
                     <inset key="scrollIndicatorInsets" minX="23" minY="12" maxX="32" maxY="14"/>
                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="phe-1d-Euq">
                         <size key="itemSize" width="50" height="50"/>
@@ -58,6 +59,9 @@
                     <state key="normal" title="Start">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="startClicked:" destination="-1" eventType="touchUpInside" id="FX6-MV-98z"/>
+                    </connections>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Plan the task" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GWF-yY-PEV">
                     <rect key="frame" x="13" y="215" width="269" height="42"/>
