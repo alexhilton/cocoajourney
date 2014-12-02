@@ -12,6 +12,7 @@ class TaskDetailViewController: UIViewController, UICollectionViewDataSource, UI
 
     var taskItem: NTTaskItem?
     
+    @IBOutlet weak var buttonStart: UIButton!
     @IBOutlet weak var estimatedPomodoros: UICollectionView!
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var markCompleted: UIButton!
@@ -24,7 +25,6 @@ class TaskDetailViewController: UIViewController, UICollectionViewDataSource, UI
 
         // Do any additional setup after loading the view.
         title = "Task details"
-        setupLabel()
         
         // setup the estimated pomodoro indicators.
         estimatedPomodoros.backgroundColor = UIColor.whiteColor()
@@ -43,6 +43,12 @@ class TaskDetailViewController: UIViewController, UICollectionViewDataSource, UI
         // Have to set the background with code. It does not work with XIB or storyboard.
         planTimePicker.backgroundColor = UIColor(white: 1.0, alpha: 1.0)
         planTimePicker.minimumDate = NSDate()
+        
+        refreshControls()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        refreshControls()
     }
     
     func labelPlanTapped(sender: UITapGestureRecognizer) {
@@ -60,15 +66,18 @@ class TaskDetailViewController: UIViewController, UICollectionViewDataSource, UI
         planTimePicker.hidden = !planTimePicker.hidden
     }
     
-    func setupLabel() {
+    func refreshControls() {
         let text = taskItem?.description
+        buttonStart.enabled = !taskItem!.completed!
         if taskItem!.completed! {
             let fontSize = UIFont.labelFontSize()
             var attrs = [NSForegroundColorAttributeName: UIColor.darkGrayColor(), NSStrikethroughStyleAttributeName: NSUnderlineStyle.StyleThick.rawValue, NSFontAttributeName: UIFont.italicSystemFontOfSize(fontSize)]
             descriptionLabel.attributedText = NSMutableAttributedString(string: text!, attributes: attrs)
+            markCompleted.setTitle("Mark as Incomplete", forState: UIControlState.Normal)
         } else {
             var attrs = [NSForegroundColorAttributeName: UIColor.blackColor()]
             descriptionLabel.attributedText = NSMutableAttributedString(string: text!, attributes: attrs)
+            markCompleted.setTitle("Mark complete", forState: UIControlState.Normal)
         }
     }
     
@@ -79,7 +88,7 @@ class TaskDetailViewController: UIViewController, UICollectionViewDataSource, UI
     
     @IBAction func completeClicked(sender: AnyObject) {
         taskItem?.completed = !taskItem!.completed!
-        setupLabel()
+        refreshControls()
     }
     
     @IBAction func startClicked(sender: AnyObject) {

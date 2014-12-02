@@ -24,6 +24,8 @@ class NTTaskItem {
         }
     }
     
+    var consumed: Int?
+    
     init(id: Int) {
         description = ""
         completed = false
@@ -31,6 +33,7 @@ class NTTaskItem {
         type = .Today
         self.id = id
         estimated = 0
+        consumed = 0
     }
     
     init(description: String?, id: Int) {
@@ -40,6 +43,7 @@ class NTTaskItem {
         type = .Today
         self.id = id
         estimated = 0
+        consumed = 0
     }
     
     class func createData() -> [NTTaskItem] {

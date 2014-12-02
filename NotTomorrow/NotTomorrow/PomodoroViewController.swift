@@ -17,8 +17,11 @@ class PomodoroViewController: UIViewController {
     @IBOutlet weak var labelCountDown: UILabel!
     @IBOutlet weak var labelType: UILabel!
     @IBOutlet weak var labelDescription: UILabel!
+    @IBOutlet weak var labelPomodoroNumber: UILabel!
     
     var pomodoroClockTimer: PomodoroTimer?
+    var lastPomodoroClock = 60 * 25 // 25 minutes
+    var pausing: Bool?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,12 +37,17 @@ class PomodoroViewController: UIViewController {
             labelType.text = "Rest time."
         } else {
             labelType.text = "Work time:"
-            labelCountDown.text = "25:00"
+            labelCountDown.text = ""
         }
+        labelPomodoroNumber.text = "Pomodoro #\(taskItem!.consumed! + 1)"
+        pausing = false
     }
 
     override func viewWillAppear(animated: Bool) {
-        pomodoroClockTimer = PomodoroTimer(label: labelCountDown)
+        pomodoroClockTimer = PomodoroTimer(label: labelCountDown, initCount: lastPomodoroClock) {
+            self.taskItem!.consumed! += 1
+            self.labelType.text = "Rest time."
+        }
         pomodoroClockTimer!.start()
     }
     
@@ -50,12 +58,30 @@ class PomodoroViewController: UIViewController {
     
     @IBAction func cancelClicked(sender: AnyObject) {
         pomodoroClockTimer!.cancel()
+        navigationController?.popViewControllerAnimated(true)
     }
 
     @IBAction func taskDoneClicked(sender: AnyObject) {
+        pomodoroClockTimer!.cancel()
+        taskItem!.completed = true
+        navigationController?.popViewControllerAnimated(true)
     }
     
     @IBAction func pauseClicked(sender: AnyObject) {
+        if !pausing! {
+            lastPomodoroClock = pomodoroClockTimer!.currentPomodoroClock!
+            pomodoroClockTimer?.cancel()
+            buttonPause.setTitle("Resume", forState: UIControlState.Normal)
+            pausing = true
+        } else {
+            pomodoroClockTimer = PomodoroTimer(label: labelCountDown, initCount: lastPomodoroClock) {
+                self.taskItem!.consumed! += 1
+                self.labelType.text = "Rest time."
+            }
+            pomodoroClockTimer?.start()
+            buttonPause.setTitle("Pause", forState: UIControlState.Normal)
+            pausing = false
+        }
     }
     
     /*
@@ -69,13 +95,16 @@ class PomodoroViewController: UIViewController {
     */
     
     class PomodoroTimer: NSThread {
-        var currentPomodoroClock = 25*60
         var label: UILabel?
+        var acallback: ()-> Void
+        var currentPomodoroClock: Int?
         
-        init(label: UILabel) {
+        init(label: UILabel, initCount: Int, callback: () -> Void) {
+            self.label = label
+            self.acallback = callback
+            self.currentPomodoroClock = initCount
             super.init()
             name = "PomodoroTimer"
-            self.label = label
         }
         
         override func main() {
@@ -88,12 +117,15 @@ class PomodoroViewController: UIViewController {
                 if cancelled {
                     break
                 }
-                let sec = String(format: "%02d", currentPomodoroClock % 60)
-                let min = String(format: "%02d", currentPomodoroClock / 60)
+                let sec = String(format: "%02d", currentPomodoroClock! % 60)
+                let min = String(format: "%02d", currentPomodoroClock! / 60)
                 dispatch_async(dispatch_get_main_queue()) {
                     self.label!.text = "\(min):\(sec)"
                 }
-                currentPomodoroClock--
+                currentPomodoroClock!--
+            }
+            if !cancelled {
+                acallback()
             }
         }
     }

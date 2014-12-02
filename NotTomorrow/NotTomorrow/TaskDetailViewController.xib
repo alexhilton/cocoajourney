@@ -6,6 +6,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TaskDetailViewController" customModule="NotTomorrow" customModuleProvider="target">
             <connections>
+                <outlet property="buttonStart" destination="B3y-Wf-j27" id="njI-3y-iEI"/>
                 <outlet property="delete" destination="P1s-hR-zpd" id="upx-sb-t6c"/>
                 <outlet property="descriptionLabel" destination="Qab-5w-7Gw" id="ZSg-Pk-Ccb"/>
                 <outlet property="estimatedPomodoros" destination="0Cu-hf-CJY" id="jai-EE-NcW"/>
@@ -21,7 +22,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Pb-iV-kkY">
-                    <rect key="frame" x="13" y="530" width="131" height="30"/>
+                    <rect key="frame" x="13" y="530" width="178" height="30"/>
                     <state key="normal" title="Mark completed">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
@@ -30,7 +31,7 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P1s-hR-zpd">
-                    <rect key="frame" x="185" y="530" width="63" height="30"/>
+                    <rect key="frame" x="218" y="530" width="63" height="30"/>
                     <state key="normal" title="Delete">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
@@ -45,7 +46,6 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" indicatorStyle="white" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="0Cu-hf-CJY">
-                    <rect key="frame" x="21" y="118" width="447" height="62"/>
                     <inset key="scrollIndicatorInsets" minX="23" minY="12" maxX="32" maxY="14"/>
                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="phe-1d-Euq">
                         <size key="itemSize" width="50" height="50"/>
@@ -70,7 +70,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="exL-G1-ghJ">
-                    <rect key="frame" x="0.0" y="444" width="277" height="162"/>
+                    <rect key="frame" x="9" y="443" width="277" height="162"/>
                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     <date key="date" timeIntervalSinceReferenceDate="438793078.61081398">
                         <!--2014-11-27 14:57:58 +0000-->
