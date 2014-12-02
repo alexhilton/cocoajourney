@@ -45,15 +45,6 @@
                     <color key="textColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" indicatorStyle="white" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="0Cu-hf-CJY">
-                    <inset key="scrollIndicatorInsets" minX="23" minY="12" maxX="32" maxY="14"/>
-                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="phe-1d-Euq">
-                        <size key="itemSize" width="50" height="50"/>
-                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                    </collectionViewFlowLayout>
-                </collectionView>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B3y-Wf-j27">
                     <rect key="frame" x="28" y="480" width="60" height="34"/>
                     <state key="normal" title="Start">
@@ -79,6 +70,16 @@
                         <action selector="planTimeChanged:" destination="-1" eventType="valueChanged" id="Vm8-Mn-F1h"/>
                     </connections>
                 </datePicker>
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" indicatorStyle="white" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="0Cu-hf-CJY">
+                    <rect key="frame" x="29" y="108" width="417" height="63"/>
+                    <inset key="scrollIndicatorInsets" minX="23" minY="12" maxX="32" maxY="14"/>
+                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="phe-1d-Euq">
+                        <size key="itemSize" width="50" height="50"/>
+                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    </collectionViewFlowLayout>
+                </collectionView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <point key="canvasLocation" x="-77" y="130"/>
