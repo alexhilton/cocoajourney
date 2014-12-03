@@ -10,7 +10,7 @@ import UIKit
 
 class TaskDetailViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
 
-    var taskItem: NTTaskItem?
+    var taskItem: TaskEntity?
     
     @IBOutlet weak var buttonStart: UIButton!
     @IBOutlet weak var estimatedPomodoros: UICollectionView!
@@ -52,7 +52,7 @@ class TaskDetailViewController: UIViewController, UICollectionViewDataSource, UI
     }
     
     func labelPlanTapped(sender: UITapGestureRecognizer) {
-        if taskItem!.completed! {
+        if taskItem!.isCompleted {
             let alert = UIAlertView()
             alert.title = "Notification"
             alert.message = "The task is already completed. You do not need to plan it anymore. ^_^"
@@ -60,23 +60,22 @@ class TaskDetailViewController: UIViewController, UICollectionViewDataSource, UI
             alert.show()
             return
         }
-        if let date = taskItem!.startTime {
-            planTimePicker.date = date
-        }
+        planTimePicker.date = taskItem!.startTime
+        
         planTimePicker.hidden = !planTimePicker.hidden
     }
     
     func refreshControls() {
-        let text = taskItem?.description
-        buttonStart.enabled = !taskItem!.completed!
-        if taskItem!.completed! {
+        let text = taskItem!.taskDescription
+        buttonStart.enabled = !taskItem!.isCompleted
+        if taskItem!.isCompleted {
             let fontSize = UIFont.labelFontSize()
             var attrs = [NSForegroundColorAttributeName: UIColor.darkGrayColor(), NSStrikethroughStyleAttributeName: NSUnderlineStyle.StyleThick.rawValue, NSFontAttributeName: UIFont.italicSystemFontOfSize(fontSize)]
-            descriptionLabel.attributedText = NSMutableAttributedString(string: text!, attributes: attrs)
+            descriptionLabel.attributedText = NSMutableAttributedString(string: text, attributes: attrs)
             markCompleted.setTitle("Mark as Incomplete", forState: UIControlState.Normal)
         } else {
             var attrs = [NSForegroundColorAttributeName: UIColor.blackColor()]
-            descriptionLabel.attributedText = NSMutableAttributedString(string: text!, attributes: attrs)
+            descriptionLabel.attributedText = NSMutableAttributedString(string: text, attributes: attrs)
             markCompleted.setTitle("Mark complete", forState: UIControlState.Normal)
         }
     }
@@ -87,7 +86,7 @@ class TaskDetailViewController: UIViewController, UICollectionViewDataSource, UI
     }
     
     @IBAction func completeClicked(sender: AnyObject) {
-        taskItem?.completed = !taskItem!.completed!
+        taskItem!.isCompleted = !taskItem!.isCompleted
         refreshControls()
     }
     
@@ -102,11 +101,12 @@ class TaskDetailViewController: UIViewController, UICollectionViewDataSource, UI
         navigationController?.popViewControllerAnimated(true)
         let nav = UIApplication.sharedApplication().delegate?.window??.rootViewController as UINavigationController
         let tableViewController = nav.visibleViewController as TodayListController
-        tableViewController.deleteTask(self.taskItem!.id!)
+        // TODO: id
+        tableViewController.deleteTask(self.taskItem!.type.integerValue)
     }
 
     @IBAction func planTimeChanged(sender: AnyObject) {
-        if taskItem!.completed! {
+        if taskItem!.isCompleted {
             return
         }
         let picker = sender as UIDatePicker
@@ -140,7 +140,7 @@ class TaskDetailViewController: UIViewController, UICollectionViewDataSource, UI
         var cell = collectionView.dequeueReusableCellWithReuseIdentifier("cell", forIndexPath: indexPath) as UICollectionViewCell
         cell.backgroundColor = UIColor.darkGrayColor()
         var thumb = UIImageView(frame: cell.contentView.frame)
-        thumb.image = UIImage(named: (indexPath.row < taskItem?.estimated ? "ic_checked_normal.png" : "ic_unchcked_normal.png"))
+        thumb.image = UIImage(named: (indexPath.row < taskItem!.estimated.integerValue ? "ic_checked_normal.png" : "ic_unchcked_normal.png"))
         thumb.clipsToBounds = true
         cell.contentView.addSubview(thumb)
         return cell
@@ -156,7 +156,7 @@ class TaskDetailViewController: UIViewController, UICollectionViewDataSource, UI
     }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        if taskItem!.completed! {
+        if taskItem!.isCompleted {
             let alert = UIAlertView()
             alert.title = "Notification"
             alert.message = "The task is already completed. You do not need to estimate it anymore. ^_^"
@@ -164,7 +164,7 @@ class TaskDetailViewController: UIViewController, UICollectionViewDataSource, UI
             alert.show()
             return
         }
-        taskItem?.estimated = indexPath.row + 1
+        taskItem!.estimated = indexPath.row + 1
         collectionView.reloadData()
     }
     

@@ -9,7 +9,7 @@
 import UIKit
 
 class PomodoroViewController: UIViewController {
-    var taskItem: NTTaskItem?
+    var taskItem: TaskEntity?
     
     @IBOutlet weak var buttonCancel: UIButton!
     @IBOutlet weak var buttonDone: UIButton!
@@ -27,10 +27,10 @@ class PomodoroViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        labelDescription.text = taskItem!.description
+        labelDescription.text = taskItem!.taskDescription
         
         // if task is already completed, disable all buttons and timers
-        if taskItem!.completed! {
+        if taskItem!.isCompleted {
             buttonCancel.enabled = false
             buttonDone.enabled = false
             buttonPause.enabled = false
@@ -39,13 +39,13 @@ class PomodoroViewController: UIViewController {
             labelType.text = "Work time:"
             labelCountDown.text = ""
         }
-        labelPomodoroNumber.text = "Pomodoro #\(taskItem!.consumed! + 1)"
+        labelPomodoroNumber.text = "Pomodoro #\(taskItem!.consumed.integerValue + 1)"
         pausing = false
     }
 
     override func viewWillAppear(animated: Bool) {
         pomodoroClockTimer = PomodoroTimer(label: labelCountDown, initCount: lastPomodoroClock) {
-            self.taskItem!.consumed! += 1
+            self.taskItem!.consumed = NSNumber(int: self.taskItem!.consumed.integerValue + 1)
             self.labelType.text = "Rest time."
         }
         pomodoroClockTimer!.start()
@@ -75,7 +75,7 @@ class PomodoroViewController: UIViewController {
             pausing = true
         } else {
             pomodoroClockTimer = PomodoroTimer(label: labelCountDown, initCount: lastPomodoroClock) {
-                self.taskItem!.consumed! += 1
+                self.taskItem!.consumed = NSNumber(int: self.taskItem!.consumed.integerValue + 1)
                 self.labelType.text = "Rest time."
             }
             pomodoroClockTimer?.start()
