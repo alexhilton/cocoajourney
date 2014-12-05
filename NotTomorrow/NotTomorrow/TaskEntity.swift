@@ -41,6 +41,9 @@ class TaskEntity: NSManagedObject {
         newItem.consumed = 0
         newItem.type = 1
         
+        var error: NSError?
+        moc.save(&error)
+        
         return newItem
     }
 }

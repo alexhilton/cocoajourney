@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class TaskDetailViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
 
@@ -20,6 +21,16 @@ class TaskDetailViewController: UIViewController, UICollectionViewDataSource, UI
     
     @IBOutlet weak var labelPlan: UILabel!
     @IBOutlet weak var planTimePicker: UIDatePicker!
+    
+    lazy var managedObjectContext: NSManagedObjectContext? = {
+        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        if let moc = appDelegate.managedObjectContext {
+            return moc
+        } else {
+            return nil
+        }
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -49,6 +60,11 @@ class TaskDetailViewController: UIViewController, UICollectionViewDataSource, UI
     
     override func viewWillAppear(animated: Bool) {
         refreshControls()
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        var error: NSError?
+        managedObjectContext?.save(&error)
     }
     
     func labelPlanTapped(sender: UITapGestureRecognizer) {
@@ -98,11 +114,7 @@ class TaskDetailViewController: UIViewController, UICollectionViewDataSource, UI
     }
     
     @IBAction func deleteClicked(sender: AnyObject) {
-        navigationController?.popViewControllerAnimated(true)
-        let nav = UIApplication.sharedApplication().delegate?.window??.rootViewController as UINavigationController
-        let tableViewController = nav.visibleViewController as TodayListController
-        // TODO: id
-        tableViewController.deleteTask(self.taskItem!.type.integerValue)
+        managedObjectContext?.deleteObject(taskItem!)
     }
 
     @IBAction func planTimeChanged(sender: AnyObject) {

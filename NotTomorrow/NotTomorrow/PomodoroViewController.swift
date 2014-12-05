@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class PomodoroViewController: UIViewController {
     var taskItem: TaskEntity?
@@ -22,6 +23,15 @@ class PomodoroViewController: UIViewController {
     var pomodoroClockTimer: PomodoroTimer?
     var lastPomodoroClock = 60 * 25 // 25 minutes
     var pausing: Bool?
+    
+    lazy var managedObjectContext: NSManagedObjectContext? = {
+        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        if let moc = appDelegate.managedObjectContext {
+            return moc
+        } else {
+            return nil
+        }
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,6 +59,11 @@ class PomodoroViewController: UIViewController {
             self.labelType.text = "Rest time."
         }
         pomodoroClockTimer!.start()
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        var error: NSError?
+        managedObjectContext?.save(&error)
     }
     
     override func didReceiveMemoryWarning() {

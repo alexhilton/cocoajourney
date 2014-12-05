@@ -7,9 +7,18 @@
 //
 
 import UIKit
+import CoreData
 
 class AddTaskTableViewCell: UITableViewCell, UITextFieldDelegate {
-
+    lazy var managedObjectContext: NSManagedObjectContext? = {
+        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        if let moc = appDelegate.managedObjectContext {
+            return moc
+        } else {
+            return nil
+        }
+    }()
+    
     @IBOutlet weak var addTaskBox: UITextField!
     var addingNewTask: Bool? {
         didSet {
@@ -41,10 +50,8 @@ class AddTaskTableViewCell: UITableViewCell, UITextFieldDelegate {
     
     @IBAction func taskAdded(sender: AnyObject) {
         NSLog("stuff task '%@'", addTaskBox!.text)
-        let nav = UIApplication.sharedApplication().delegate?.window??.rootViewController as UINavigationController
-        let tableViewController = nav.visibleViewController as TodayListController
-        tableViewController.addTask(self.addTaskBox!.text)
-        tableViewController.tableView.reloadData()
+        TaskEntity.forgeItem(managedObjectContext!, title: addTaskBox!.text)
+        
         addTaskBox!.resignFirstResponder()
         addingNewTask = false
     }
