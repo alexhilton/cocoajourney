@@ -124,16 +124,16 @@ class TodayListController: UITableViewController {
         if tasks![indexPath.row].completed! {
             let fontSize = UIFont.labelFontSize()
             var attrs = [NSForegroundColorAttributeName: UIColor.darkGrayColor(), NSStrikethroughStyleAttributeName: NSUnderlineStyle.StyleThick.rawValue, NSFontAttributeName: UIFont.italicSystemFontOfSize(fontSize)]
-            cell.textLabel.attributedText = NSMutableAttributedString(string: text, attributes: attrs)
+            cell.textLabel!.attributedText = NSMutableAttributedString(string: text, attributes: attrs)
         } else {
             var attrs = [NSForegroundColorAttributeName: UIColor.blackColor()]
-            cell.textLabel.attributedText = NSMutableAttributedString(string: text, attributes: attrs)
+            cell.textLabel!.attributedText = NSMutableAttributedString(string: text, attributes: attrs)
         }
         
         cell.accessoryType = UITableViewCellAccessoryType.DetailButton
         let completed = taskList[indexPath.row].isCompleted
-        cell.imageView.image = UIImage(named: (completed ? "ic_checked_normal.png" : "ic_unchcked_normal.png"))
-        cell.imageView.userInteractionEnabled = false
+        cell.imageView!.image = UIImage(named: (completed ? "ic_checked_normal.png" : "ic_unchcked_normal.png"))
+        cell.imageView!.userInteractionEnabled = false
         return cell
     }
     

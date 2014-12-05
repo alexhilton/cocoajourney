@@ -14,10 +14,10 @@ class AddTaskTableViewCell: UITableViewCell, UITextFieldDelegate {
     var addingNewTask: Bool? {
         didSet {
             NSLog("after set value to addingNewTask %@", addingNewTask!)
-            imageView.hidden = !addingNewTask!
+            imageView!.hidden = !addingNewTask!
             addTaskBox!.hidden = !addingNewTask!
             if addingNewTask! {
-                imageView.image = UIImage(named: "ic_unchcked_normal.png")
+                imageView!.image = UIImage(named: "ic_unchcked_normal.png")
                 addTaskBox!.becomeFirstResponder()
             }
         }
@@ -26,7 +26,7 @@ class AddTaskTableViewCell: UITableViewCell, UITextFieldDelegate {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        imageView.hidden = true
+        imageView!.hidden = true
         addingNewTask = false
         addTaskBox!.hidden = true
         addTaskBox!.delegate = self
